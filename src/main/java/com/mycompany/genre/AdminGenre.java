@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AdminGenre {
 
@@ -15,7 +16,7 @@ public class AdminGenre {
         this.conn = connection.connect();
     }
 
-    public void insertGenre(Genre genre) {
+    public int insertGenre(Genre genre) {
         try {
             //Insert query
             String query = "INSERT INTO genres (genre_name) VALUES (?)";
@@ -24,14 +25,14 @@ public class AdminGenre {
 
             int rowsAffected = stmt.executeUpdate();
 
-            System.out.print("Rows affected: " + rowsAffected);
+            return rowsAffected;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            return -1;
         }
     }
 
-    public void updateGenre(Genre genre) {
+    public int updateGenre(Genre genre) {
         try {
             //Update data
             String updateQuery = "UPDATE genres SET genre_name = ? WHERE genre_id = ?";
@@ -41,14 +42,14 @@ public class AdminGenre {
 
             int rowsAffected = stmt.executeUpdate();
 
-            System.out.println(rowsAffected + " row(s) updated.");
+            return rowsAffected;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            return -1;
         }
     }
 
-    public void deleteGenre(int genre_id) {
+    public int deleteGenre(int genre_id) {
         try {
             //Update data
             String updateQuery = "DELETE FROM genres WHERE genre_id = ?";
@@ -57,14 +58,15 @@ public class AdminGenre {
 
             int rowsAffected = stmt.executeUpdate();
 
-            System.out.println(rowsAffected + " row(s) deleted.");
-
+            return rowsAffected;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
+            return -1;
         }
     }
 
-    public void getAll() {
+    public ArrayList<Genre> getAll() {
+        ArrayList<Genre> genreList = new ArrayList<Genre>();
         try {
             //Make query
             String query = "SELECT genre_id, genre_name FROM genres";
@@ -72,12 +74,17 @@ public class AdminGenre {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                String name = rs.getString("student_name");
-                String id = rs.getString("student_id");
-                System.out.print("id: " + id + " Name: " + name + "\n");
+
+                String name = rs.getString("genre_name");
+                int id = rs.getInt("genre_id");
+
+                Genre genre = new Genre(id, name);
+                genreList.add(genre);
             }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return genreList;
     }
 }
