@@ -1,0 +1,4 @@
+com\mycompany\genre\DB_Connection.class
+com\mycompany\genre\Main.class
+com\mycompany\genre\Genre.class
+com\mycompany\genre\AdminGenre.class
