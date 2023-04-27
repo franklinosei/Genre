@@ -9,18 +9,18 @@ import java.util.ArrayList;
 
 public class AdminGenre {
 
-    Connection conn = null;
+   private Connection conn = null;
 
     public AdminGenre() {
         DB_Connection connection = new DB_Connection();
         this.conn = connection.connect();
     }
 
-    public int insertGenre(Genre genre) {
+    public int insertGenre(Genre genre) throws Exception {
         try {
             //Insert query
             String query = "INSERT INTO genres (genre_name) VALUES (?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setString(1, genre.getGenreName());
 
             int rowsAffected = stmt.executeUpdate();
@@ -28,15 +28,15 @@ public class AdminGenre {
             return rowsAffected;
 
         } catch (SQLException e) {
-            return -1;
+            throw new Exception(e.getMessage());
         }
     }
 
-    public int updateGenre(Genre genre) {
+    public int updateGenre(Genre genre) throws Exception {
         try {
             //Update data
             String updateQuery = "UPDATE genres SET genre_name = ? WHERE genre_id = ?";
-            PreparedStatement stmt = conn.prepareStatement(updateQuery);
+            PreparedStatement stmt = this.conn.prepareStatement(updateQuery);
             stmt.setString(1, genre.getGenreName());
             stmt.setInt(2, genre.getGenreID());
 
@@ -45,32 +45,31 @@ public class AdminGenre {
             return rowsAffected;
 
         } catch (SQLException e) {
-            return -1;
+            throw new Exception(e.getMessage());
         }
     }
 
-    public int deleteGenre(int genre_id) {
+    public int deleteGenre(int genre_id) throws Exception {
         try {
             //Update data
             String updateQuery = "DELETE FROM genres WHERE genre_id = ?";
-            PreparedStatement stmt = conn.prepareStatement(updateQuery);
+            PreparedStatement stmt = this.conn.prepareStatement(updateQuery);
             stmt.setInt(1, genre_id);
 
             int rowsAffected = stmt.executeUpdate();
 
             return rowsAffected;
         } catch (SQLException e) {
-
-            return -1;
+            throw new Exception(e.getMessage());
         }
     }
 
-    public ArrayList<Genre> getAll() {
-        ArrayList<Genre> genreList = new ArrayList<Genre>();
+    public ArrayList<Genre> getAll() throws Exception {
         try {
+            ArrayList<Genre> genreList = new ArrayList<Genre>();
             //Make query
             String query = "SELECT genre_id, genre_name FROM genres";
-            Statement stmt = conn.createStatement();
+            Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -82,9 +81,11 @@ public class AdminGenre {
                 genreList.add(genre);
             }
 
+            return genreList;
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
         }
-        return genreList;
+
     }
 }
