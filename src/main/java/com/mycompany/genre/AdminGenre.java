@@ -11,9 +11,8 @@ public class AdminGenre {
 
    private Connection conn = null;
 
-    public AdminGenre() {
-        DB_Connection connection = new DB_Connection();
-        this.conn = connection.connect();
+    public AdminGenre(Connection conn) {
+        this.conn = conn;
     }
 
     public int insertGenre(Genre genre) throws Exception {

@@ -13,23 +13,24 @@ public class DB_Connection {
     private Connection conn = null;
 
 //    private Statement stmt;
-    public Connection connect() {
+    public Connection connect() throws Exception {
 
         try {
             this.conn = DriverManager.getConnection(this.url, this.username, this.password);
-            System.out.println("Coonection successful");
+
+            return this.conn;
 
         } catch (SQLException e) {
-            System.err.println("Error: " + e.getMessage());
+            throw new Exception(e.getMessage());
         }
 
-        return this.conn;
     }
 
-    public void closeConnection() {
+    public void closeConnection() throws Exception {
         try {
             this.conn.close();
         } catch (SQLException e) {
+            throw new Exception(e.getMessage());
         }
 
     }

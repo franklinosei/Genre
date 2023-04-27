@@ -1,13 +1,27 @@
 package com.mycompany.genre;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Genre genre = new Genre(1, "K-Pop");
-        AdminGenre ad_genre = new AdminGenre();
+        //  DB Connection
+        DB_Connection connection = new DB_Connection();
+
+        Connection db_instance = null;
+
+        try {
+            db_instance = connection.connect();
+            System.out.println("Database connection Successful 🔥🔥🔥 ");
+        } catch (Exception e) {
+            System.out.println("Database connection error: ");
+            System.out.println(e.getMessage());
+        }
+
+        Genre genre = new Genre(10, "Niger drill");
+        AdminGenre ad_genre = new AdminGenre(db_instance);
 
         try {
             // Insert data
@@ -29,7 +43,7 @@ public class Main {
 
         try {
             // Delete
-            int deletedRows = ad_genre.deleteGenre(8);
+            int deletedRows = ad_genre.deleteGenre(7);
             System.out.println("Delete affected " + deletedRows + " of rows");
         } catch (Exception e) {
             System.out.println("Delete Error\n");
@@ -46,6 +60,15 @@ public class Main {
 
         } catch (Exception e) {
             System.out.println("Get all data Error\n");
+            System.out.println(e.getMessage());
+        }
+
+        //  close db connection
+        try {
+            connection.closeConnection();
+            System.out.println("Database closed\n");
+        } catch (Exception e) {
+            System.out.println("Closing database error\n");
             System.out.println(e.getMessage());
         }
 
