@@ -8,17 +8,17 @@ public class DB_Connection {
 
     private String url = "jdbc:mysql://localhost/music";
     private String username = "root";
-    private String password = "password";
+    private String password = "s0249612579S";
 
     private Connection conn = null;
 
 //    private Statement stmt;
     public Connection connect() throws Exception {
         try {
-
-            this.conn = DriverManager.getConnection(this.url, this.username, this.password);
-
-            return this.conn;
+            if (conn == null || conn.isClosed()) {
+                conn = DriverManager.getConnection(url, username, password);
+            }
+            return conn;
 
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
@@ -28,13 +28,11 @@ public class DB_Connection {
 
     public void closeConnection() throws Exception {
         try {
-            this.conn.close();
+            if(conn != null && !conn.isClosed()){
+                conn.isClosed();
+            }
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
         }
     }
-
-//    public Statement getStatement() {
-//        return stmt;
-//    }
 }
