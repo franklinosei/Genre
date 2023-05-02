@@ -11,7 +11,7 @@ public class AdminGenre {
 
     private Connection conn = null;
 
-    //  DB Connection
+    // DB Connection
     private DB_Connection connection = new DB_Connection();
 
     public AdminGenre() {
@@ -27,7 +27,7 @@ public class AdminGenre {
     public int insertGenre(Genre genre) throws Exception {
 
         try {
-            //Insert query
+            // Insert query
             String query = "INSERT INTO genres (genre_name) VALUES (?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, genre.getGenreName());
@@ -45,7 +45,7 @@ public class AdminGenre {
     public int updateGenre(Genre genre) throws Exception {
 
         try {
-            //Update data
+            // Update data
             String updateQuery = "UPDATE genres SET genre_name = ? WHERE genre_id = ?";
             PreparedStatement stmt = conn.prepareStatement(updateQuery);
             stmt.setString(1, genre.getGenreName());
@@ -63,7 +63,7 @@ public class AdminGenre {
     public int deleteGenre(int genre_id) throws Exception {
 
         try {
-            //Update data
+            // Update data
             String updateQuery = "DELETE FROM genres WHERE genre_id = ?";
             PreparedStatement stmt = this.conn.prepareStatement(updateQuery);
             stmt.setInt(1, genre_id);
@@ -80,7 +80,7 @@ public class AdminGenre {
 
         try {
             ArrayList<Genre> genreList = new ArrayList<>();
-            //Make query
+            // Make query
             String query = "SELECT genre_id, genre_name FROM genres";
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -102,4 +102,5 @@ public class AdminGenre {
         }
 
     }
+
 }

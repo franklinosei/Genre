@@ -1,7 +1,9 @@
 package com.mycompany.genre;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -86,5 +88,6 @@ public class Main {
                 default -> System.out.println("Please CHOOSE a VALID option from the MENU!!");
             }
         }
+
     }
 }
