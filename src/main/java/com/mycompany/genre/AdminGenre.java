@@ -11,10 +11,11 @@ public class AdminGenre {
 
     private Connection conn = null;
 
+    //  DB Connection
+    private DB_Connection connection = new DB_Connection();
+
     public AdminGenre() {
         try {
-            //  DB Connection
-            DB_Connection connection = new DB_Connection();
             this.conn = connection.connect();
             System.out.println("Database connection Successful 🔥🔥🔥 ");
         } catch (Exception e) {
@@ -39,6 +40,7 @@ public class AdminGenre {
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
         }
+
     }
 
     public int updateGenre(Genre genre) throws Exception {
@@ -102,12 +104,13 @@ public class AdminGenre {
 
     }
 
-    //  close db connection
-//        try {
-//            connection.closeConnection();
-//            System.out.println("Database closed\n");
-//        } catch (Exception e) {
-//            System.out.println("Closing database error\n");
-//            System.out.println(e.getMessage());
-//        }
+    public void closeConnection() throws Exception {
+        //  close db connection
+        try {
+            this.connection.closeConnection();   
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
 }

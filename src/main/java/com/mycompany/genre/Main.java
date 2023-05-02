@@ -1,6 +1,4 @@
 package com.mycompany.genre;
-
-import java.sql.Connection;
 import java.util.ArrayList;
 
 public class Main {
@@ -11,8 +9,8 @@ public class Main {
         Genre genre = new Genre(10, "Niger drill");
         AdminGenre ad_genre = new AdminGenre();
 
+        // Insert data
         try {
-            // Insert data
             int insertRowsAffected = ad_genre.insertGenre(genre);
             System.out.println("Insertion affected " + insertRowsAffected + " of rows");
         } catch (Exception e) {
@@ -20,8 +18,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        // Update data
         try {
-            // Update data
             int updateRowsAffected = ad_genre.updateGenre(genre);
             System.out.println("Update affected " + updateRowsAffected + " of rows");
         } catch (Exception e) {
@@ -29,8 +27,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        // Delete
         try {
-            // Delete
             int deletedRows = ad_genre.deleteGenre(7);
             System.out.println("Delete affected " + deletedRows + " of rows");
         } catch (Exception e) {
@@ -38,8 +36,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        // All data
         try {
-            // All data
             ArrayList<Genre> allGenre = ad_genre.getAll();
 
             for (Genre genreData : allGenre) {
@@ -50,5 +48,19 @@ public class Main {
             System.out.println("Get all data Error\n");
             System.out.println(e.getMessage());
         }
+
+        
+
+        //  Try closing db connection
+        try {
+            ad_genre.closeConnection();
+            System.out.println("Database closed successfully!");
+        } catch (Exception e) {
+            System.out.println("Error closing database connection\n");
+            System.out.println(e.getMessage());
+        }
+        
+        
+        
     }
 }

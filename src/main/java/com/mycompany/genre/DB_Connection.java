@@ -14,7 +14,6 @@ public class DB_Connection {
 
 //    private Statement stmt;
     public Connection connect() throws Exception {
-
         try {
 
             this.conn = DriverManager.getConnection(this.url, this.username, this.password);
@@ -33,7 +32,6 @@ public class DB_Connection {
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
         }
-
     }
 
 //    public Statement getStatement() {
