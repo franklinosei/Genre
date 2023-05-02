@@ -7,21 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //  DB Connection
-        DB_Connection connection = new DB_Connection();
-        Connection db_instance = null;
-
-        try {
-            db_instance = connection.connect();
-            System.out.println("Database connection Successful 🔥🔥🔥 ");
-        } catch (Exception e) {
-            System.out.println("Database connection error: ");
-            System.out.println(e.getMessage());
-        }
-
         // Initialization
         Genre genre = new Genre(10, "Niger drill");
-        AdminGenre ad_genre = new AdminGenre(db_instance);
+        AdminGenre ad_genre = new AdminGenre();
 
         try {
             // Insert data
@@ -62,15 +50,5 @@ public class Main {
             System.out.println("Get all data Error\n");
             System.out.println(e.getMessage());
         }
-
-        //  close db connection
-        try {
-            connection.closeConnection();
-            System.out.println("Database closed\n");
-        } catch (Exception e) {
-            System.out.println("Closing database error\n");
-            System.out.println(e.getMessage());
-        }
-
     }
 }

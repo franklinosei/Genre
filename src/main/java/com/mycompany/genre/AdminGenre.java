@@ -12,11 +12,16 @@ public class AdminGenre {
     private Connection conn = null;
 
     public AdminGenre() {
+        try {
+            //  DB Connection
+            DB_Connection connection = new DB_Connection();
+            this.conn = connection.connect();
+            System.out.println("Database connection Successful 🔥🔥🔥 ");
+        } catch (Exception e) {
+            System.out.println("Database connection error: ");
+            System.out.println(e.getMessage());
+        }
 
-    }
-
-    public AdminGenre(Connection conn) {
-        this.conn = conn;
     }
 
     public int insertGenre(Genre genre) throws Exception {
@@ -28,7 +33,7 @@ public class AdminGenre {
             stmt.setString(1, genre.getGenreName());
 
             int rowsAffected = stmt.executeUpdate();
-            stmt.close();
+
             return rowsAffected;
 
         } catch (SQLException e) {
@@ -96,4 +101,13 @@ public class AdminGenre {
         }
 
     }
+
+    //  close db connection
+//        try {
+//            connection.closeConnection();
+//            System.out.println("Database closed\n");
+//        } catch (Exception e) {
+//            System.out.println("Closing database error\n");
+//            System.out.println(e.getMessage());
+//        }
 }
