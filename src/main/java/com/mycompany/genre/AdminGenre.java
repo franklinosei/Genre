@@ -103,14 +103,5 @@ public class AdminGenre {
         }
 
     }
-
-    public void closeConnection() throws Exception {
-        //  close db connection
-        try {
-            this.connection.closeConnection();   
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
     
 }

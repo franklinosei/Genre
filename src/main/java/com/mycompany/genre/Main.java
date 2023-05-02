@@ -55,18 +55,6 @@ public class Main {
                 System.out.println(e.getMessage());
             }
         }
-
-        
-
-        //  Try closing db connection
-        try {
-            DB_Connection.closeConnection();
-            System.out.println("Database closed successfully!");
-        } catch (Exception e) {
-            System.out.println("Error closing database connection\n");
-            System.out.println(e.getMessage());
-        }
-        
         
         
     }
