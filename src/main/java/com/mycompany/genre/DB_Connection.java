@@ -6,10 +6,6 @@ import java.sql.SQLException;
 
 public class DB_Connection {
 
-    private String url = "jdbc:mysql://localhost/music";
-    private String username = "root";
-    private String password = "s0249612579S";
-
     private static Connection conn = null;
 
 //    private Statement stmt;
@@ -17,6 +13,9 @@ public class DB_Connection {
 
         try {
             if (conn == null || conn.isClosed()) {
+                String password = "s0249612579S";
+                String username = "root";
+                String url = "jdbc:mysql://localhost/music";
                 conn = DriverManager.getConnection(url, username, password);
             }
             return conn;
