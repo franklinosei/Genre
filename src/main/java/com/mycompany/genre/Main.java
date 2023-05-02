@@ -83,7 +83,6 @@ public class Main {
                     DB_Connection.closeConnection();
                     System.out.println("BYE!!!");
                     System.exit(0);
-                    break;
                 }
                 default -> System.out.println("Please CHOOSE a VALID option from the MENU!!");
             }
