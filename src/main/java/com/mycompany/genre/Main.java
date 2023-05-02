@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // Initialization
         Genre genre = new Genre(10, "Niger drill");
@@ -47,13 +47,20 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Get all data Error\n");
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                DB_Connection.closeConnection();
+                System.out.println("connection closed");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         
 
         //  Try closing db connection
         try {
-            ad_genre.closeConnection();
+            DB_Connection.closeConnection();
             System.out.println("Database closed successfully!");
         } catch (Exception e) {
             System.out.println("Error closing database connection\n");
