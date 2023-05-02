@@ -12,11 +12,12 @@ public class AdminGenre {
    private Connection conn = null;
 
     public AdminGenre() {
-        DB_Connection connection = new DB_Connection();
-        this.conn = connection.connect();
+
     }
 
     public int insertGenre(Genre genre) throws Exception {
+        DB_Connection connection = new DB_Connection();
+        this.conn = connection.connect();
         try {
             //Insert query
             String query = "INSERT INTO genres (genre_name) VALUES (?)";
@@ -24,15 +25,25 @@ public class AdminGenre {
             stmt.setString(1, genre.getGenreName());
 
             int rowsAffected = stmt.executeUpdate();
-
+            stmt.close();
             return rowsAffected;
 
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
+        } finally {
+            if(conn != null){
+                try{
+                    conn.close();
+                } catch (SQLException e){
+                    throw new Exception(e.getMessage());
+                }
+            }
         }
     }
 
     public int updateGenre(Genre genre) throws Exception {
+        DB_Connection connection = new DB_Connection();
+        this.conn = connection.connect();
         try {
             //Update data
             String updateQuery = "UPDATE genres SET genre_name = ? WHERE genre_id = ?";
@@ -41,15 +52,25 @@ public class AdminGenre {
             stmt.setInt(2, genre.getGenreID());
 
             int rowsAffected = stmt.executeUpdate();
-
+            stmt.close();
             return rowsAffected;
 
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new Exception(e.getMessage());
+                }
+            }
         }
     }
 
     public int deleteGenre(int genre_id) throws Exception {
+        DB_Connection connection = new DB_Connection();
+        this.conn = connection.connect();
         try {
             //Update data
             String updateQuery = "DELETE FROM genres WHERE genre_id = ?";
@@ -57,14 +78,24 @@ public class AdminGenre {
             stmt.setInt(1, genre_id);
 
             int rowsAffected = stmt.executeUpdate();
-
+            stmt.close();
             return rowsAffected;
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new Exception(e.getMessage());
+                }
+            }
         }
     }
 
     public ArrayList<Genre> getAll() throws Exception {
+        DB_Connection connection = new DB_Connection();
+        this.conn = connection.connect();
         try {
             ArrayList<Genre> genreList = new ArrayList<Genre>();
             //Make query
@@ -80,11 +111,20 @@ public class AdminGenre {
                 Genre genre = new Genre(id, name);
                 genreList.add(genre);
             }
-
+            stmt.close();
+            rs.close();
             return genreList;
 
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new Exception(e.getMessage());
+                }
+            }
         }
 
     }
