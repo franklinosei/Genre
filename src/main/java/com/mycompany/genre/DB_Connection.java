@@ -10,7 +10,6 @@ public class DB_Connection {
 
 //    private Statement stmt;
     public Connection connect() throws Exception {
-
         try {
             if (conn == null || conn.isClosed()) {
                 String password = "s0249612579S";
@@ -34,6 +33,5 @@ public class DB_Connection {
         } catch (SQLException e) {
             throw new Exception(e.getMessage());
         }
-
     }
 }
