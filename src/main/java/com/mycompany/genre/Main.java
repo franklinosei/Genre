@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         // Initialization
         Genre genre = new Genre(10, "Niger drill");
@@ -49,6 +49,13 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Get all data Error\n");
             System.out.println(e.getMessage());
+        } finally {
+            System.out.println("connection closed");
+            try {
+                DB_Connection.closeConnection();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
