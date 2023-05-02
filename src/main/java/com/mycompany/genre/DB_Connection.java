@@ -10,7 +10,7 @@ public class DB_Connection {
     private String username = "root";
     private String password = "s0249612579S";
 
-    private Connection conn = null;
+    private static Connection conn = null;
 
 //    private Statement stmt;
     public Connection connect() throws Exception {
@@ -27,7 +27,7 @@ public class DB_Connection {
 
     }
 
-    public void closeConnection() throws Exception {
+    public static void closeConnection() throws Exception {
         try {
             if(conn != null && !conn.isClosed()){
                 conn.isClosed();
