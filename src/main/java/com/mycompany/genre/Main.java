@@ -9,7 +9,6 @@ public class Main {
 
         //  DB Connection
         DB_Connection connection = new DB_Connection();
-
         Connection db_instance = null;
 
         try {
@@ -20,6 +19,7 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        // Initialization
         Genre genre = new Genre(10, "Niger drill");
         AdminGenre ad_genre = new AdminGenre(db_instance);
 

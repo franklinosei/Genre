@@ -16,6 +16,7 @@ public class DB_Connection {
     public Connection connect() throws Exception {
 
         try {
+
             this.conn = DriverManager.getConnection(this.url, this.username, this.password);
 
             return this.conn;
@@ -34,4 +35,8 @@ public class DB_Connection {
         }
 
     }
+
+//    public Statement getStatement() {
+//        return stmt;
+//    }
 }
