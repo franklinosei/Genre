@@ -8,14 +8,15 @@ public class DB_Connection {
 
     private static Connection conn = null;
 
+    String password = "s0249612579S";
+    String username = "root";
+    String url = "jdbc:mysql://localhost/music";
 
 //    private Statement stmt;
     public Connection connect() throws Exception {
         try {
             if (conn == null || conn.isClosed()) {
-                String password = "password";
-                String username = "root";
-                String url = "jdbc:mysql://localhost/music";
+
                 conn = DriverManager.getConnection(url, username, password);
             }
             return conn;

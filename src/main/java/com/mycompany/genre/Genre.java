@@ -8,9 +8,17 @@ public class Genre {
     public Genre() {
     }
 
+    public Genre(String genre_Name){
+        this.genre_name = genre_Name;
+    }
+
     public Genre(int genre_id, String genre_name) {
         this.genre_id = genre_id;
         this.genre_name = genre_name;
+    }
+
+    public Genre(int genreID){
+        this.genre_id = genreID;
     }
 
     public void setGenreName(String genreName) {
