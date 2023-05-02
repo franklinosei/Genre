@@ -8,7 +8,7 @@ public class DB_Connection {
 
     private String url = "jdbc:mysql://localhost/music";
     private String username = "root";
-    private String password = "s0249612579S";
+    private String password = "password";
 
     private Connection conn = null;
 
