@@ -16,8 +16,7 @@ public class AdminGenre {
 
     public AdminGenre() {
         try {
-            this.conn = connection.connect();
-            System.out.println("Database connection Successful 🔥🔥🔥 ");
+            conn = connection.connect();
         } catch (Exception e) {
             System.out.println("Database connection error: ");
             System.out.println(e.getMessage());
@@ -30,7 +29,7 @@ public class AdminGenre {
         try {
             //Insert query
             String query = "INSERT INTO genres (genre_name) VALUES (?)";
-            PreparedStatement stmt = this.conn.prepareStatement(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, genre.getGenreName());
 
             int rowsAffected = stmt.executeUpdate();
@@ -48,7 +47,7 @@ public class AdminGenre {
         try {
             //Update data
             String updateQuery = "UPDATE genres SET genre_name = ? WHERE genre_id = ?";
-            PreparedStatement stmt = this.conn.prepareStatement(updateQuery);
+            PreparedStatement stmt = conn.prepareStatement(updateQuery);
             stmt.setString(1, genre.getGenreName());
             stmt.setInt(2, genre.getGenreID());
 
@@ -80,7 +79,7 @@ public class AdminGenre {
     public ArrayList<Genre> getAll() throws Exception {
 
         try {
-            ArrayList<Genre> genreList = new ArrayList<Genre>();
+            ArrayList<Genre> genreList = new ArrayList<>();
             //Make query
             String query = "SELECT genre_id, genre_name FROM genres";
             Statement stmt = this.conn.createStatement();
@@ -103,14 +102,4 @@ public class AdminGenre {
         }
 
     }
-
-    public void closeConnection() throws Exception {
-        //  close db connection
-        try {
-            this.connection.closeConnection();   
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-    
 }
