@@ -50,9 +50,9 @@ public class Main {
             System.out.println("Get all data Error\n");
             System.out.println(e.getMessage());
         } finally {
-            System.out.println("connection closed");
             try {
                 DB_Connection.closeConnection();
+                System.out.println("connection closed");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
